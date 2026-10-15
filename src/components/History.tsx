@@ -1,0 +1,4 @@
+import type { Result } from '../types';
+export function History({history, onClear}: {history: Result[]; onClear: () => void}) {
+  return <section className="panel" aria-labelledby="history-title"><div className="section-top"><h2 id="history-title">Results history</h2><button onClick={onClear}>Clear history</button></div>{history.length ? <div className="table-scroll"><table><caption className="sr-only">Completed revision attempts, newest first</caption><thead><tr><th scope="col">Topic</th><th scope="col">Score</th><th scope="col">Completed</th></tr></thead><tbody>{[...history].reverse().map(result => <tr key={result.id}><th scope="row">{result.topic}</th><td>{result.score} / {result.total}</td><td><time dateTime={result.completedAt}>{new Date(result.completedAt).toLocaleString('en-GB')}</time></td></tr>)}</tbody></table></div> : <p className="muted">Your completed attempts will appear here. Choose a topic to get started.</p>}</section>;
+}
